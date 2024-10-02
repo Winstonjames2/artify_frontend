@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/colors.dart';
 import 'product_grid.dart';
-import '../widgets/search_bar.dart';
+import 'account_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,48 +9,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-  bool _isSearching = false;
-  String _searchQuery = "";
+  final List<Widget> _pages = [
+    ProductGrid(), // Main product page
+    Center(child: Text('Custom')), // Placeholder for custom page
+    Center(child: Text('Favorites')), // Placeholder for favorites page
+    AccountPage(), // Account page
+  ];
+  int _currentIndex = 0; // Keeps track of the current page index
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CustomSearchBar(
-          isSearching: _isSearching,
-          onCancelSearch: () {
-            setState(() {
-              _isSearching = false;
-              _searchQuery = "";
-            });
-          },
-          onSearch: (query) {
-            setState(() {
-              _searchQuery = query;
-            });
-          },
-        ),
-        actions: [
-          if (!_isSearching)
-            IconButton(
-              icon: Icon(Icons.search, color: Colors.white),
-              onPressed: () {
-                setState(() {
-                  _isSearching = true;
-                });
-              },
-            ),
-          IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.white), // Cart icon
-            onPressed: () {
-              // Add cart functionality here
-            },
-          ),
-        ],
-        backgroundColor: Colors.orange,
-      ),
-      body: _isSearching ? _buildSearchResults() : ProductGrid(),
+      body: _pages[_currentIndex], // Display the current page
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -57,9 +28,10 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = index;
           });
         },
-        backgroundColor: Colors.orange, // Bottom navigation background color
-        selectedItemColor: Colors.black, // Icon color when selected
-        unselectedItemColor: Colors.white, // Icon color when unselected
+        backgroundColor:
+            AppColors.primary, // Bottom navigation background color
+        selectedItemColor: AppColors.accent, // Icon color when selected
+        unselectedItemColor: AppColors.secondary, // Icon color when unselected
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -71,12 +43,6 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.account_circle), label: 'Account'),
         ],
       ),
-    );
-  }
-
-  Widget _buildSearchResults() {
-    return Center(
-      child: Text("Displaying results for: $_searchQuery"),
     );
   }
 }
