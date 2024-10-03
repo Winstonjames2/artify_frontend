@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../services/colors.dart';
-import '../services/product_service.dart';
+// import '../services/product_service.dart';
 import '../widgets/search_bar.dart';
+import '../widgets/carousel_slide.dart';
 
 class ProductGrid extends StatefulWidget {
   @override
@@ -9,15 +10,24 @@ class ProductGrid extends StatefulWidget {
 }
 
 class _ProductGridState extends State<ProductGrid> {
-  final ProductService _productService = ProductService();
-  late Future<List<dynamic>> _products;
+  // final ProductService _productService = ProductService();
+  // late Future<List<dynamic>> _products;
   bool _isSearching = false; // Manages search state
   String _searchQuery = ""; // Stores search query
+
+  final List<String> imageUrls = [
+    'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
+    'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
+    'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
+    'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
+    'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
+    // Add more image URLs as needed...
+  ];
 
   @override
   void initState() {
     super.initState();
-    _products = _productService.fetchProducts();
+    // _products = _productService.fetchProducts();
   }
 
   @override
@@ -55,48 +65,27 @@ class _ProductGridState extends State<ProductGrid> {
               },
             ),
           IconButton(
-            icon: Icon(Icons.shopping_cart,
-                color: AppColors.secondary), // Cart icon
+            icon: Icon(Icons.shopping_cart, color: AppColors.secondary),
             onPressed: () {
               // Add cart functionality here
             },
           ),
         ],
-        backgroundColor: AppColors.primary, // AppBar background color
+        backgroundColor: AppColors.primary,
       ),
       body: _isSearching
           ? _buildSearchResults()
-          : FutureBuilder<List<dynamic>>(
-              future: _products,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                  final products = snapshot.data!;
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 2,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: Column(
-                          children: [
-                            Image.network(products[index]['image_url'],
-                                fit: BoxFit.cover),
-                            Text(products[index]['title']),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return Center(child: Text('No products found'));
-                }
-              },
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 25),
+                  CarouselSlide(imageUrls: imageUrls),
+                  SizedBox(height: 25),
+                  CarouselSlide(imageUrls: imageUrls),
+                  SizedBox(height: 25),
+                  CarouselSlide(imageUrls: imageUrls),
+                ],
+              ),
             ),
     );
   }
