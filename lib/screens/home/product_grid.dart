@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import '../services/colors.dart';
-// import '../services/product_service.dart';
-import '../widgets/search_bar.dart';
-import '../widgets/carousel_slide.dart';
+import '../../services/colors.dart';
+import '../../widgets/search_bar.dart';
+import 'package:provider/provider.dart';
+import '../../models/login_state.dart';
+import 'logged_out_view.dart';
+import 'logged_in_view.dart';
 
 class ProductGrid extends StatefulWidget {
+  const ProductGrid({super.key});
+
   @override
   _ProductGridState createState() => _ProductGridState();
 }
 
 class _ProductGridState extends State<ProductGrid> {
-  // final ProductService _productService = ProductService();
-  // late Future<List<dynamic>> _products;
   bool _isSearching = false; // Manages search state
   String _searchQuery = ""; // Stores search query
 
@@ -21,17 +23,18 @@ class _ProductGridState extends State<ProductGrid> {
     'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
     'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
     'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
-    // Add more image URLs as needed...
+    'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msOP5.img',
   ];
 
   @override
   void initState() {
     super.initState();
-    // _products = _productService.fetchProducts();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loginState = Provider.of<LoginState>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: _isSearching
@@ -52,8 +55,8 @@ class _ProductGridState extends State<ProductGrid> {
             : Text('Artify',
                 style: TextStyle(
                     color: AppColors.secondary,
-                    fontSize: 28,
-                    fontWeight: FontWeight.normal)),
+                    fontSize: 29,
+                    fontWeight: FontWeight.w500)),
         actions: [
           if (!_isSearching)
             IconButton(
@@ -71,24 +74,19 @@ class _ProductGridState extends State<ProductGrid> {
             },
           ),
         ],
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.white,
       ),
+
+      // Change the view based on the login status
       body: _isSearching
           ? _buildSearchResults()
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 25),
-                  CarouselSlide(imageUrls: imageUrls),
-                  SizedBox(height: 25),
-                  CarouselSlide(imageUrls: imageUrls),
-                  SizedBox(height: 25),
-                  CarouselSlide(imageUrls: imageUrls),
-                ],
-              ),
-            ),
+          : loginState.isLoggedIn
+              ? LoggedInView() // Show content if logged in
+              : LoggedInView(), // Show login prompt if not logged in
     );
   }
+
+  // Method to build the section with title and carousel
 
   Widget _buildSearchResults() {
     return Center(

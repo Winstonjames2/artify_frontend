@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'product_model.dart'; // Import the product model
 
 class ProductGrid extends StatefulWidget {
+  const ProductGrid({super.key});
+
   @override
   _ProductGridState createState() => _ProductGridState();
 }

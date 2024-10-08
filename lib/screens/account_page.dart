@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import '../services/colors.dart';
 
 class AccountPage extends StatelessWidget {
+  const AccountPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Unique AppBar for the Account Page or no AppBar
       appBar: AppBar(
         title: Text('Account'),
-        backgroundColor: AppColors.primary, // Optional: Customize color
+        backgroundColor: AppColors.white, // Optional: Customize color
       ),
 
       // Main body of the Account Page
@@ -16,7 +18,7 @@ class AccountPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.account_circle, size: 100, color: AppColors.primary),
+            Icon(Icons.account_circle, size: 100, color: AppColors.white),
             SizedBox(height: 20),
             Text(
               'Welcome to Your Account!',
@@ -32,17 +34,15 @@ class AccountPage extends StatelessWidget {
               onPressed: () {
                 // Add navigation to profile settings or other actions
               },
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.white),
               child: Text('Edit Profile'),
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
             ),
             ElevatedButton(
               onPressed: () {
                 // Add functionality for logging out or other actions
               },
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.white),
               child: Text('Log Out'),
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
             ),
           ],
         ),

@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselSlide extends StatefulWidget {
   final List<String> imageUrls;
-  CarouselSlide({required this.imageUrls});
+  const CarouselSlide({super.key, required this.imageUrls});
 
   @override
   _CarouselSlideState createState() => _CarouselSlideState();
@@ -15,9 +15,10 @@ class _CarouselSlideState extends State<CarouselSlide> {
     return Container(
       child: CarouselSlider(
         options: CarouselOptions(
-          height: 150, // Adjust height as needed
-          viewportFraction: 0.9, // Adjust for the number of items to be visible
-          initialPage: 1,
+          height: 140, // Adjust height as needed
+          viewportFraction:
+              0.95, // Adjust for the number of items to be visible
+          initialPage: 0,
           enableInfiniteScroll: false,
           autoPlay: false,
         ),
@@ -37,7 +38,7 @@ class _CarouselSlideState extends State<CarouselSlide> {
                           child: Image.network(
                             widget.imageUrls[i],
                             fit: BoxFit.cover,
-                            height: 250, // Adjust based on your design
+                            height: 200, // Adjust based on your design
                           ),
                         ),
                       ),
@@ -52,7 +53,7 @@ class _CarouselSlideState extends State<CarouselSlide> {
                             child: Image.network(
                               widget.imageUrls[i + 1],
                               fit: BoxFit.cover,
-                              height: 250, // Adjust based on your design
+                              height: 200, // Adjust based on your design
                             ),
                           ),
                         ),

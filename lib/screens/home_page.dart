@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../services/colors.dart';
-import 'product_grid.dart';
-import 'account_page.dart';
+import 'home/product_grid.dart';
+// import 'account_page.dart';
+import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -13,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     ProductGrid(), // Main product page
     Center(child: Text('Custom')), // Placeholder for custom page
     Center(child: Text('Favorites')), // Placeholder for favorites page
-    AccountPage(), // Account page
+    LoginPage(), // Account page
   ];
   int _currentIndex = 0; // Keeps track of the current page index
 
@@ -28,8 +31,8 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = index;
           });
         },
-        backgroundColor:
-            AppColors.primary, // Bottom navigation background color
+
+        backgroundColor: AppColors.white, // Bottom navigation background color
         selectedItemColor: AppColors.accent, // Icon color when selected
         unselectedItemColor: AppColors.secondary, // Icon color when unselected
         type: BottomNavigationBarType.fixed,
