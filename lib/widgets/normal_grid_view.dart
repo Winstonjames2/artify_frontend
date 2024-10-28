@@ -4,8 +4,7 @@ import '../services/colors.dart'; // Adjust the import according to your project
 class NormalGridView extends StatelessWidget {
   final List<String> featuredItemsImages;
 
-  const NormalGridView({Key? key, required this.featuredItemsImages})
-      : super(key: key);
+  const NormalGridView({super.key, required this.featuredItemsImages});
 
   @override
   Widget build(BuildContext context) {

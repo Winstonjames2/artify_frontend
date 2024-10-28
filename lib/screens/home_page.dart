@@ -24,27 +24,42 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex], // Display the current page
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white, // Set the background color of the nav bar
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2), // Shadow color
+              spreadRadius: 1, // Spread of shadow
+              blurRadius: 5, // Softness of shadow
+              offset: Offset(0, 3), // Position: (horizontal, vertical)
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
 
-        backgroundColor: AppColors.white, // Bottom navigation background color
-        selectedItemColor: AppColors.accent, // Icon color when selected
-        unselectedItemColor: AppColors.secondary, // Icon color when unselected
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.design_services), label: 'Custom'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Favorites'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: 'Account'),
-        ],
+          backgroundColor:
+              AppColors.white, // Bottom navigation background color
+          selectedItemColor: AppColors.accent, // Icon color when selected
+          unselectedItemColor:
+              AppColors.secondary, // Icon color when unselected
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.design_services), label: 'Custom'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite), label: 'Favorites'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle), label: 'Account'),
+          ],
+        ),
       ),
     );
   }

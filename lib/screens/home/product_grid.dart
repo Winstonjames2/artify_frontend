@@ -37,6 +37,10 @@ class _ProductGridState extends State<ProductGrid> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation:
+            6.0, // Controls the shadow (higher values create a deeper shadow)
+        shadowColor:
+            Colors.black.withOpacity(0.4), // Set shadow color if needed
         title: _isSearching
             ? CustomSearchBar(
                 isSearching: _isSearching,

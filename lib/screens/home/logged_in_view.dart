@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/colors.dart'; // Adjust this import based on your project structure
+// import '../../services/colors.dart'; // Adjust this import based on your project structure
 import '../../widgets/categroy_view.dart'; // Import your CategoryView file
 import '../../widgets/normal_grid_view.dart'; // Import your NormalGridView file
 import '../../widgets/small_carousel_slide.dart'; // Import your SmallCarouselSlide file
@@ -41,25 +41,15 @@ class LoggedInView extends StatelessWidget {
               title: 'Recently Viewed',
               recentlyViewed: recentlyViewed,
             ),
+          SizedBox(height: 15),
 
-          // Categories Section
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Shop by Category',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
-              ),
-            ),
-          ),
-          CategoryView(categories: categories),
+          CategoryView(title: 'Shop by Categorys', categories: categories),
+          SizedBox(height: 15),
 
           // Featured Items Grid View
           NormalGridView(featuredItemsImages: featuredItemsImages),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
         ],
       ),
     );
